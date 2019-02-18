@@ -5,4 +5,6 @@ This script installs a copy of Docker (latest stable version) and a Portainer co
 
 Then installs OpenVPN, and Pihole to secure your network and your devices from privacy invasion.
 
+*Hope you enjoy and contribute*
+
 
