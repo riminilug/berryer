@@ -19,7 +19,7 @@ If you made mistakes it's possible to restart the procedure and skip working con
 
 To update containers, simply restart the procedure and give the initial paramenters.
 
-This script is tested to work on a Raspberry PI 3 B+
+This script is preliminary.
 
 **Hope you enjoy and contribute**
 
