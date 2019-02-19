@@ -5,9 +5,13 @@ This Bash script installs and configure a copy of Docker (latest stable version)
 
 To start the procedure on your Raspberry, copy berryer.sh to your device and start it typing in a Bash shell:
 
-`# chmod +x barryer.sh`
+`$ git clone`https://github.com/riminilug/berryer`
 
-Then execute the scipt:
+`$ cd berryer`
+
+`# chmod +x berryer.sh`
+
+Then execute the script:
 
 `# ./berryer.sh`
 
