@@ -1,19 +1,19 @@
 # Berryer
-*Turn Raspberry PI 3 B+ in a privacy wall*
+***Turn Raspberry PI 3 B+ in a privacy wall***
 
-This Bash script installs and configure:
+This Bash script installs and guide you through the configuration of:
 
-Docker [Official site](https://www.docker.com) (latest stable version) 
+- Docker [Official site](https://www.docker.com) (latest stable version) 
 
 Docker containers:
 
-Portainer [Official site](https://www.portainer.io/) - [container](https://hub.docker.com/r/portainer/portainer)
+- Portainer [Official site](https://www.portainer.io/) - [container](https://hub.docker.com/r/portainer/portainer)
 
-OpenVPN [Official site](https://openvpn.net/) - [container](https://hub.docker.com/r/giggio/openvpn-arm)
+- OpenVPN [Official site](https://openvpn.net/) - [container](https://hub.docker.com/r/giggio/openvpn-arm)
 
-Pihole [Official site](https://pi-hole.net/)  - [container](https://hub.docker.com/r/pihole/pihole)
+- Pihole [Official site](https://pi-hole.net/)  - [container](https://hub.docker.com/r/pihole/pihole)
 
-Motioneye [Official site](https://github.com/ccrisan/motioneye) - [container](https://hub.docker.com/r/jshridha/motioneye) 
+- Motioneye [Official site](https://github.com/ccrisan/motioneye) - [container](https://hub.docker.com/r/jshridha/motioneye) 
 
 The aim of the project is to protect your network and your devices from modern privacy invasion.
 
@@ -50,4 +50,4 @@ These procedures are tested working on a Raspberry Pi 3B+.
 
 These scripts are preliminary.
 
-**Hope you enjoy and contribute**
+***Hope you enjoy and contribute***
