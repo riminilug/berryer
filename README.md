@@ -1,7 +1,18 @@
 # Berryer
 *Turn Raspberry PI 3 B+ in a privacy wall*
 
-This Bash script installs and configure a copy of Docker (latest stable version) and various containers: Portainer, OpenVPN, Pihole, Motioneye to protect your network and your devices from modern privacy invasion.
+This Bash script installs and configure:
+
+Docker [Official site](https://www.docker.com) (latest stable version) 
+
+Docker containers:
+
+Portainer [Official site](https://www.portainer.io/) - [container](https://hub.docker.com/r/portainer/portainer)
+OpenVPN [Official site](https://openvpn.net/) - [container](https://hub.docker.com/r/giggio/openvpn-arm)
+Pihole [Official site](https://pi-hole.net/)  - [container](https://hub.docker.com/r/pihole/pihole)
+Motioneye [Official site](https://github.com/ccrisan/motioneye) - [container](https://hub.docker.com/r/jshridha/motioneye) 
+
+The aim of the project is to protect your network and your devices from modern privacy invasion.
 
 To start the procedure on your Raspberry, ensure you have a working Raspbian installation on a Raspberry PI 3 B+.
 Then give the following commands:
@@ -31,6 +42,8 @@ The script `duckdns_configure.sh`, is the assisted procedure to configure an exi
 `chmod +x duckdns_configure.sh`
 
 `sudo ./duckdns_configure.sh`
+
+
 
 These procedures are tested working on a Raspberry Pi 3B+.
 
