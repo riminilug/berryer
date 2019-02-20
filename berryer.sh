@@ -56,9 +56,9 @@ then
     then
         echo "Installing OpenVPN..."
 
-        read -p "Insert your domain name. Example: my-sub-domain.duckdns.org and press: " DOMAIN
+        read -p "Insert your domain name. Example: my-sub-domain.duckdns.org and press [enter]: " DOMAIN
 
-        read -p "Insert the name of the client you wish to enable OpenVPN in: " CLIENT_NAME
+        read -p "Insert the name of the client you wish to enable OpenVPN in and press [enter]: " CLIENT_NAME
 
         OVPN_DATA="ovpn-data-privacybox"
         docker rm -f openvpn  2>/dev/null
@@ -71,6 +71,7 @@ then
 
         echo "Certificate for the client saved in $(pwd)/${CLIENT_NAME}.ovpn"
         echo "OpenVPN installed"
+        echo ""
         echo "Use the following commands to generate other certificates. Substitute CLIENT_NAME with the desired cert name"
         echo "docker run -v ${OVPN_DATA}:/etc/openvpn --log-driver=none --rm -it giggio/openvpn-arm easyrsa build-client-full CLIENT_NAME nopass"
         echo "docker run -v ${OVPN_DATA}:/etc/openvpn --log-driver=none --rm giggio/openvpn-arm ovpn_getclient CLIENT_NAME > CLIENT_NAME.ovpn"
