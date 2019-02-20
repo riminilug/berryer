@@ -23,4 +23,4 @@ chmod 700 duck.sh
 (crontab -l 2>/dev/null; echo "*/5 * * * * $(pwd)/duck.sh >/dev/null 2>&1") | crontab -
 echo "Procedure finished"
 echo "You can view updated crontab typing"
-echo "sudo crontab -e"
+echo "sudo crontab -e "
