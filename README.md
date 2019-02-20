@@ -3,7 +3,7 @@
 
 This Bash script installs and configure a copy of Docker (latest stable version) and various containers: Portainer, OpenVPN, Pihole, Motioneye to protect your network and your devices from modern privacy invasion.
 
-To start the procedure on your Raspberry, ensure you have a working Raspbian installation in a Raspberry PI 3 B+.
+To start the procedure on your Raspberry, ensure you have a working Raspbian installation on a Raspberry PI 3 B+.
 Then give the following commands:
 
 `sudo apt install git`
@@ -12,7 +12,7 @@ Then give the following commands:
 
 `cd berryer`
 
-`sudo chmod +x berryer.sh`
+`chmod +x berryer.sh`
 
 Then execute the procedure:
 
@@ -26,6 +26,14 @@ If you made mistakes it's possible to restart the procedure and skip working con
 
 To update containers installed with this procedure, simply run again this procedure and give the parameters given in the first installation.
 
-This script is preliminary.
+The script `duckdns_configure.sh`, is the assisted procedure to configure an exixting duckdns.org domain.
+
+`chmod +x duckdns_configure.sh`
+
+`sudo ./duckdns_configure.sh`
+
+These procedures are tested working on a Raspberry Pi 3B+.
+
+These scripts are preliminary.
 
 **Hope you enjoy and contribute**
