@@ -16,12 +16,12 @@ read -p "Insert the domain name eg.: mydomain.duckdns.org and press [enter]" DOM
 read -p "Insert the token of your account and press [enter]" TOKEN
 echo "This procedure will install and configure all software for a working duckdns.org DDNS domain on a Raspbian"
 echo "Starting procedure.."
-apt get install curl
+apt install curl
 
 mkdir duckdns
 cd duckdns
 
-echo "url=\"https://www.duckdns.org/update?domains=${DOMAIN}&token=${TOKEN}&ip=\" | curl -k -o $(pwd)/duck.log -K -" > duck.sh
+echo "echo url=\"https://www.duckdns.org/update?domains=${DOMAIN}&token=${TOKEN}&ip=\" | curl -k -o $(pwd)/duck.log -K -" > duck.sh
 
 chmod 700 duck.sh
 

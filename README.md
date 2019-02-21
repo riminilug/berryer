@@ -49,6 +49,6 @@ The script `duckdns_configure.sh`, is the assisted procedure to configure an exi
 
 These procedures are tested working on a Raspberry Pi 3B+.
 
-These scripts are preliminary.
+These scripts are preliminary and tested only on Kubuntu and Raspbian
 
 ***Hope you enjoy and contribute***
