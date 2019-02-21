@@ -1,4 +1,9 @@
 #!/bin/bash
+#
+# Description: Auto system to to setup a privacy wall on Raspbian
+#
+# Copyright (C) 2019 Simone Foschi <s.foschi@gmail.com>
+#
 
 if [[ "$(id -u)" -ne 0 ]]; then
     echo "Script must be run under sudo."
