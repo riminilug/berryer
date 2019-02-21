@@ -1,4 +1,5 @@
-# Berryer
+# Berryer is a barrier against privacy invasion using Raspberry
+
 ***Turn Raspberry PI 3 B+ in a privacy wall***
 
 This Bash script installs and guide you through the configuration of:
@@ -15,7 +16,7 @@ Docker containers:
 
 - Motioneye [Official site](https://github.com/ccrisan/motioneye) - [container](https://hub.docker.com/r/jshridha/motioneye) 
 
-The aim of the project is to protect your network and your devices from modern privacy invasion.
+The aim of the project is to protect your network and your devices from modern privacy invasion wiht the help of a low energy consumption device to manage all your web connections.
 
 To start the procedure on your Raspberry, ensure you have a working Raspbian installation on a Raspberry PI 3 B+.
 Then give the following commands:
