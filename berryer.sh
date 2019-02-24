@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Description: Auto system to to setup a privacy wall on Raspbian
+# Description: Auto system to setup a privacy wall on Raspberry Pi with docker
 #
 # Copyright (C) 2019 Simone Foschi <s.foschi@gmail.com>
 #
@@ -9,6 +9,7 @@ if [[ "$(id -u)" -ne 0 ]]; then
     echo "Script must be run under sudo."
     exit 1
 fi
+
 # Lookups may not work for VPN / tun0
 IP_LOOKUP="$(ip route get 8.8.8.8 | awk '{for(i=1;i<=NF;i++) if ($i=="src") print $(i+1)}')"  
 IPv6_LOOKUP="$(ip -6 route get 2001:4860:4860::8888 | awk '{for(i=1;i<=NF;i++) if ($i=="src") print $(i+1)}')"  
@@ -18,14 +19,14 @@ IP="${IP:-$IP_LOOKUP}"  # use $IP, if set, otherwise IP_LOOKUP
 IPv6="${IPv6:-$IPv6_LOOKUP}"  # use $IPv6, if set, otherwise IP_LOOKUP
 
 read -p 'do you have an available domain, a static ip address on Raspberry and configured port forwarding of port 1194 on the router? [Y/n]: ' EXTERNAL_CONFIGURATION
-if [ $EXTERNAL_CONFIGURATION == '' ] || [ $EXTERNAL_CONFIGURATION == 'Y' ] || [ $EXTERNAL_CONFIGURATION == 'y' ]
+if [ $EXTERNAL_CONFDOCKERIGURATION == '' ] || [ $EXTERNAL_CONFIGURATION == 'Y' ] || [ $EXTERNAL_CONFIGURATION == 'y' ]
 then
     read -p 'do you want to install Docker? [Y/n]: ' DOCKER
     if [ $DOCKER == '' ] || [ $DOCKER == 'Y' ] || [ $DOCKER == 'y' ]
     then
         #check if docker is installed, if yes skip otherwise this script installs it
-        if [ -x !"$(command -v docker)" ]
-        then
+        #if [ -x !"$(command -v docker)" ]
+        #then
             echo "Installing Docker..."
             curl -sSL https://get.docker.com | sh
             echo "Docker will be configured for user pi"
@@ -33,9 +34,9 @@ then
             echo "sudo usermod -aG docker YOURUSER"
             usermod -aG docker pi
             echo "Docker installed and configured for user pi, logout and login to apply changes"
-        else
-            echo "Docker is already installed"
-        fi
+        #else
+        #    echo "Docker is already installed"
+        #fi
     fi
 
     read -p "do you want to install Portainer? [Y/n]: " PORTAINER
@@ -116,7 +117,7 @@ then
 
         echo "Pihole administration visible at http://pi.hole/admin"
         echo "or http://${IP}/admin"
-        echo -n "Your password is " docker logs pihole 2> /dev/null | grep 'random'
+        echo "Your password is " docker logs pihole 2> /dev/null | grep 'random'
         echo ""
     fi
 
