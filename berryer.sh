@@ -12,17 +12,17 @@ fi
 
 # Lookups may not work for VPN / tun0
 IP_LOOKUP="$(ip route get 8.8.8.8 | awk '{for(i=1;i<=NF;i++) if ($i=="src") print $(i+1)}')"  
-IPv6_LOOKUP="$(ip -6 route get 2001:4860:4860::8888 | awk '{for(i=1;i<=NF;i++) if ($i=="src") print $(i+1)}')"  
+#IPv6_LOOKUP="$(ip -6 route get 2001:4860:4860::8888 | awk '{for(i=1;i<=NF;i++) if ($i=="src") print $(i+1)}')"  
 
 # Just hard code these to your docker server's LAN IP if lookups aren't working
 IP="${IP:-$IP_LOOKUP}"  # use $IP, if set, otherwise IP_LOOKUP
-IPv6="${IPv6:-$IPv6_LOOKUP}"  # use $IPv6, if set, otherwise IP_LOOKUP
+#IPv6="${IPv6:-$IPv6_LOOKUP}"  # use $IPv6, if set, otherwise IP_LOOKUP
 
-read -p 'do you have an available domain, a static ip address on Raspberry and configured port forwarding of port 1194 on the router? [Y/n]: ' EXTERNAL_CONFIGURATION
-if [ $EXTERNAL_CONFDOCKERIGURATION == '' ] || [ $EXTERNAL_CONFIGURATION == 'Y' ] || [ $EXTERNAL_CONFIGURATION == 'y' ]
+read -p 'do you have an available domain, a static ip address on Raspberry and configured port forwarding of port 1194 on the router? [y/n]: ' NETWORK_CONFIGURATION_AVAILABLE
+if [ $NETWORK_CONFIGURATION_AVAILABLE == 'Y' ] || [ $NETWORK_CONFIGURATION_AVAILABLE == 'y' ]
 then
-    read -p 'do you want to install Docker? [Y/n]: ' DOCKER
-    if [ $DOCKER == '' ] || [ $DOCKER == 'Y' ] || [ $DOCKER == 'y' ]
+    read -p 'do you want to install Docker? [y/n]: ' DOCKER
+    if [ $DOCKER == 'Y' ] || [ $DOCKER == 'y' ]
     then
         #check if docker is installed, if yes skip otherwise this script installs it
         #if [ -x !"$(command -v docker)" ]
@@ -39,9 +39,9 @@ then
         #fi
     fi
 
-    read -p "do you want to install Portainer? [Y/n]: " PORTAINER
+    read -p "do you want to install Portainer? [y/n]: " PORTAINER
 
-    if [ $PORTAINER == '' ] || [ $PORTAINER == 'Y' ] || [ $PORTAINER == 'y' ]
+    if [ $PORTAINER == 'Y' ] || [ $PORTAINER == 'y' ]
     then
         echo "Installing Portainer..."
         #try to remove exixting installation then create or update che container
@@ -56,9 +56,9 @@ then
     fi
 
     
-    read -p "do you want to install OpenVPN? [Y/n]: " OPENVPN
+    read -p "do you want to install OpenVPN? [y/n]: " OPENVPN
 
-    if [ $OPENVPN == '' ] || [ $OPENVPN == 'Y' ] || [ $OPENVPN == 'y' ]
+    if [ $OPENVPN == 'Y' ] || [ $OPENVPN == 'y' ]
     then
         echo "Installing OpenVPN..."
 
@@ -73,9 +73,9 @@ then
         docker run -v $OVPN_DATA:/etc/openvpn --rm -it giggio/openvpn-arm ovpn_initpki
         docker run -v $OVPN_DATA:/etc/openvpn -d -p 1194:1194/udp --name openvpn --cap-add=NET_ADMIN --restart=unless-stopped giggio/openvpn-arm
         docker run -v $OVPN_DATA:/etc/openvpn --log-driver=none --rm -it giggio/openvpn-arm easyrsa build-client-full $CLIENT_NAME nopass
-        docker run -v $OVPN_DATA:/etc/openvpn --log-driver=none --rm giggio/openvpn-arm ovpn_getclient $CLIENT_NAME > $CLIENT_NAME.ovpn
+        docker run -v $OVPN_DATA:/etc/openvpn --log-driver=none --rm giggio/openvpn-arm ovpn_getclient $CLIENT_NAME > $HOME/$CLIENT_NAME.ovpn
 
-        echo "Certificate for the client saved in $(pwd)/${CLIENT_NAME}.ovpn"
+        echo "Certificate for the client saved in $HOME/${CLIENT_NAME}.ovpn"
         echo "OpenVPN installed"
         echo ""
         echo "Use the following commands to generate other certificates. Substitute CLIENT_NAME with the desired cert name"
@@ -84,18 +84,18 @@ then
     fi
 
 
-    read -p "do you want to install Pihole? [Y/n]: " PIHOLE
+    read -p "do you want to install Pihole? [y/n]: " PIHOLE
 
-    if [ $PIHOLE == '' ] || [ $PIHOLE == 'Y' ] || [ $PIHOLE == 'y' ]
+    if [ $PIHOLE == 'Y' ] || [ $PIHOLE == 'y' ]
     then
         echo "Installing Pihole..."
         #read -sp "Insert password for Pihole admin: " PASSWORD
 
 
         # Default of directory you run this from, update to where ever.
-        DOCKER_CONFIGS="$(pwd)"  
+        DOCKER_CONFIGS=$HOME
 
-        echo "### Make sure your IPs are correct, hard code ServerIP ENV VARs if necessary\nIP: ${IP}\nIPv6: ${IPv6}"
+        echo "### Make sure your IPs are correct, hard code ServerIP ENV VARs if necessary\nIP: ${IP}"
         docker rm -f pihole 2>/dev/null
         docker pull pihole/pihole:latest
         # Default ports + daemonized docker container
@@ -108,7 +108,6 @@ then
             -v "${DOCKER_CONFIGS}/pihole/:/etc/pihole/" \
             -v "${DOCKER_CONFIGS}/dnsmasq.d/:/etc/dnsmasq.d/" \
             -e ServerIP="${IP}" \
-            -e ServerIPv6="${IPv6}" \
             -e TZ="$(cat /etc/timezone)" \
             --restart unless-stopped \
             --cap-add=NET_ADMIN \
@@ -121,9 +120,9 @@ then
         echo ""
     fi
 
-    read -p "do you want to install Motioneye? [Y/n]: " MOTONEYE
+    read -p "do you want to install Motioneye? [y/n]: " MOTONEYE
 
-    if [ $MOTONEYE == '' ] || [ $MOTONEYE == 'Y' ] || [ $MOTONEYE == 'y' ]
+    if [ $MOTONEYE == 'Y' ] || [ $MOTONEYE == 'y' ]
     then
         echo "Installing Motioneye..."
         echo "https://hub.docker.com/r/jshridha/motioneye"
