@@ -24,19 +24,23 @@ then
     read -p 'do you want to install Docker? [y/n]: ' DOCKER
     if [ $DOCKER == 'Y' ] || [ $DOCKER == 'y' ]
     then
-        #check if docker is installed, if yes skip otherwise this script installs it
-        #if [ -x !"$(command -v docker)" ]
-        #then
-            echo "Installing Docker..."
-            curl -sSL https://get.docker.com | sh
-            echo "Docker will be configured for user pi"
-            echo "To use it with another account, on command line digit-->"
-            echo "sudo usermod -aG docker YOURUSER"
-            usermod -aG docker pi
-            echo "Docker installed and configured for user pi, logout and login to apply changes"
-        #else
-        #    echo "Docker is already installed"
-        #fi
+        echo "Installing Docker..."
+        curl -sSL https://get.docker.com | sh
+        echo "Docker will be configured for user pi"
+        echo "To use it with another account, on command line digit-->"
+        echo "sudo usermod -aG docker pi"
+        usermod -aG docker pi
+        echo "Docker installed and configured for user pi, logout and login to apply changes"
+    fi
+
+    read -p 'Do you want install docker-compose? [y/n]: ' DOCKER_COMPOSE
+
+    if [ $DOCKER_COMPOSE == 'Y' ] || [ $DOCKER_COMPOSE == 'y' ]
+    then
+        echo "Installing Docker Compose..."
+        apt install -y python python-pip
+        pip install docker-compose
+        echo "Docker Compose installed"
     fi
 
     read -p "do you want to install Portainer? [y/n]: " PORTAINER
