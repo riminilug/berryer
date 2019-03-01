@@ -48,7 +48,7 @@ then
         docker rm -f portainer 2>/dev/null
         docker pull portainer/portainer
         docker volume create portainer_data
-        docker run -d -p 9000:9000 --name portainer -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+        docker run -d -p 9000:9000 --name portainer --restart=unless-stopped -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
 
         echo "Portainer is active on port 9000"
         echo "to see it: http://localhost:9000"
@@ -79,8 +79,8 @@ then
         echo "OpenVPN installed"
         echo ""
         echo "Use the following commands to generate other certificates. Substitute CLIENT_NAME with the desired cert name"
-        echo "docker run -v ${OVPN_DATA}:/etc/openvpn --log-driver=none --rm -it giggio/openvpn-arm easyrsa build-client-full CLIENT_NAME nopass"
-        echo "docker run -v ${OVPN_DATA}:/etc/openvpn --log-driver=none --rm giggio/openvpn-arm ovpn_getclient CLIENT_NAME > CLIENT_NAME.ovpn"
+        echo "docker run -v ovpn-data-privacybox:/etc/openvpn --log-driver=none --rm -it giggio/openvpn-arm easyrsa build-client-full huawei-raspi-two nopass"
+        echo "docker run -v ovpn-data-privacybox:/etc/openvpn --log-driver=none --rm giggio/openvpn-arm ovpn_getclient huawei-raspi-two > huawei-raspi-two.ovpn"
     fi
 
 
@@ -116,8 +116,11 @@ then
 
         echo "Pihole administration visible at http://pi.hole/admin"
         echo "or http://${IP}/admin"
-        echo "Your password is " docker logs pihole 2> /dev/null | grep 'random'
-        echo ""
+        #echo "Your password is " docker logs pihole 2> /dev/null | grep 'random'
+        read -p "Insert admin password for pihole: " PASSWORD_PIHOLE
+        docker container exec pihole pihole -a -p PASSWORD_PIHOLE
+        echo "Password set"
+        echo "Pihole installed"
     fi
 
     read -p "do you want to install Motioneye? [y/n]: " MOTONEYE
