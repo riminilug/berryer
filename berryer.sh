@@ -38,6 +38,7 @@ then
     if [ $DOCKER_COMPOSE == 'Y' ] || [ $DOCKER_COMPOSE == 'y' ]
     then
         echo "Installing Docker Compose..."
+        apt update
         apt install -y python python-pip
         pip install docker-compose
         echo "Docker Compose installed"
