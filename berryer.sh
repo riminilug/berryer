@@ -62,7 +62,8 @@ then
 
         echo "Installing Portainer..."
         #try to remove exixting installation then create or update che container
-        docker rm -f portainer 2>/dev/null
+        docker stop portainer 2>/dev/null
+        docker rm portainer 2>/dev/null
         docker pull portainer/portainer
         docker volume create portainer_data
         docker run -d -p 9000:9000 --name portainer --restart=unless-stopped -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
@@ -89,7 +90,8 @@ then
         read -p "Insert the name of the client you wish to enable OpenVPN in and press [enter]: " CLIENT_NAME
 
         OVPN_DATA="ovpn-data-privacybox"
-        docker rm -f openvpn  2>/dev/null
+        docker stop openvpn 2>/dev/null
+        docker rm openvpn 2>/dev/null
         docker pull giggio/openvpn-arm
         docker run -v $OVPN_DATA:/etc/openvpn --rm giggio/openvpn-arm ovpn_genconfig -u udp://$DOMAIN
         docker run -v $OVPN_DATA:/etc/openvpn --rm -it giggio/openvpn-arm ovpn_initpki
@@ -124,7 +126,8 @@ then
         DOCKER_CONFIGS=$HOME
 
         echo "### Make sure your IPs are correct, hard code ServerIP ENV VARs if necessary\nIP: ${IP}"
-        docker rm -f pihole 2>/dev/null
+        docker stop pihole 2>/dev/null
+        docker rm pihole 2>/dev/null
         docker pull pihole/pihole:latest
         # Default ports + daemonized docker container
         docker run -d \
@@ -163,7 +166,8 @@ then
         echo "Installing Motioneye..."
         echo "https://hub.docker.com/r/jshridha/motioneye"
 
-        docker rm -f motioneye 2>/dev/null
+        docker stop motioneye 2>/dev/null
+        docker rm motioneye 2>/dev/null
         docker pull jshridha/motioneye:latest
         docker run -d --name=motioneye \
             -p 8081:8081 \
