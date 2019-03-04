@@ -25,6 +25,7 @@ then
     if [ $DOCKER == 'Y' ] || [ $DOCKER == 'y' ]
     then
         echo "Installing Docker..."
+        apt update
         curl -sSL https://get.docker.com | sh
         echo "Docker will be configured for user pi"
         echo "To use it with another account, on command line digit-->"
@@ -37,6 +38,11 @@ then
 
     if [ $DOCKER_COMPOSE == 'Y' ] || [ $DOCKER_COMPOSE == 'y' ]
     then
+        if [[ "$(id -u)" -ne 0 ]]; then
+            echo "Script must be run under sudo. Reexecute the procedure to install this component."
+            exit 1
+        fi
+
         echo "Installing Docker Compose..."
         apt update
         apt install -y python python-pip
@@ -48,6 +54,12 @@ then
 
     if [ $PORTAINER == 'Y' ] || [ $PORTAINER == 'y' ]
     then
+
+        if [[ "$(id -u)" -ne 0 ]]; then
+            echo "Script must be run under sudo. Reexecute the procedure to install this component."
+            exit 1
+        fi
+
         echo "Installing Portainer..."
         #try to remove exixting installation then create or update che container
         docker rm -f portainer 2>/dev/null
@@ -65,6 +77,11 @@ then
 
     if [ $OPENVPN == 'Y' ] || [ $OPENVPN == 'y' ]
     then
+        if [[ "$(id -u)" -ne 0 ]]; then
+            echo "Script must be run under sudo. Reexecute the procedure to install this component."
+            exit 1
+        fi
+
         echo "Installing OpenVPN..."
 
         read -p "Insert your domain name. Example: my-sub-domain.duckdns.org and press [enter]: " DOMAIN
@@ -93,6 +110,12 @@ then
 
     if [ $PIHOLE == 'Y' ] || [ $PIHOLE == 'y' ]
     then
+        
+        if [[ "$(id -u)" -ne 0 ]]; then
+            echo "Script must be run under sudo. Reexecute the procedure to install this component."
+            exit 1
+        fi
+
         echo "Installing Pihole..."
         #read -sp "Insert password for Pihole admin: " PASSWORD
 
@@ -132,6 +155,11 @@ then
 
     if [ $MOTONEYE == 'Y' ] || [ $MOTONEYE == 'y' ]
     then
+        if [[ "$(id -u)" -ne 0 ]]; then
+            echo "Script must be run under sudo. Reexecute the procedure to install this component."
+            exit 1
+        fi
+
         echo "Installing Motioneye..."
         echo "https://hub.docker.com/r/jshridha/motioneye"
 
@@ -150,6 +178,5 @@ then
 
         echo "Motioneye installed and visible at"
         echo "http://${IP}:8765"
-        
     fi
 fi
