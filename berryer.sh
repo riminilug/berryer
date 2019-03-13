@@ -157,7 +157,7 @@ then
                 printf ' OK'
                 echo -e "\n$(docker logs pihole 2> /dev/null | grep 'password:')"
                 exit 0
-        else
+        fi
         echo "or http://${IP}/admin"
         echo "Pihole installed"
     fi
