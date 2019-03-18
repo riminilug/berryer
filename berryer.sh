@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Description: Auto system to setup a privacy wall on Raspberry Pi with docker
+# Description: Bash-assisted setup of a privacywall on a Raspberry Pi 3B+ with Docker
 #
 # Copyright (C) 2019 Simone Foschi <s.foschi@gmail.com>
 #
@@ -65,7 +65,7 @@ then
         docker stop portainer 2>/dev/null
         docker rm portainer 2>/dev/null
         docker pull portainer/portainer
-        docker volume create portainer_data
+        docker volume create 
         docker run -d -p 9000:9000 --name portainer --restart=unless-stopped -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
 
         echo "Portainer is active on port 9000"
