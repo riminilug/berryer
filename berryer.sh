@@ -152,7 +152,7 @@ then
             --restart unless-stopped \
             --cap-add=NET_ADMIN \
             --dns=127.0.0.1 --dns=1.1.1.1 \
-            pihole/pihole:latest
+            pihole/pihole:latest  
         if [ "$(docker inspect -f "{{.State.Health.Status}}" pihole)" == "healthy" ] ; then
                 printf ' OK'
                 echo -e "\n$(docker logs pihole 2> /dev/null | grep 'password:')"
@@ -186,7 +186,7 @@ then
             --restart unless-stopped \
             -v /mnt/user/appdata/motioneye/media:/home/nobody/media \
             -v /mnt/user/appdata/motioneye/config:/config \
-            vividboarder/rpi-motioneye
+            jshridha/rpi-motioneye
 
         echo "Motioneye installed and visible at"
         echo "http://${IP}:8765"
